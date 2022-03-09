@@ -29,10 +29,16 @@ const DOG_BOSS_COLOR = 362772223;
 const SPIKE_FLOAT_COLOR = 283990527;
 const POP_UP_COLOR = 4043358719;
 const LASER_COLOR = 2416906239;
-
+const LASER_SIDE_COLOR = 2720080383;
+const TURRET_RIGHT_COLOR = 732750335;
+const TURRET_DOWN_COLOR = 478721279;
+const TURRET_LEFT_COLOR = 409570047;
+const TURRET_UP_COLOR = 256796671;
+const CLOCK_COLOR = 2451565311;
+const SIGMA_COLOR = 255;
 /**Fill These In With Your Values **/
-const IMAGE_NAME = "demo_image.png";
-const LEVEL_FUNCTION_NAME = "loadLevelOne"
+const IMAGE_NAME = "final_level.png";
+const LEVEL_FUNCTION_NAME = "loadTestLevel"
 
 
 //////////////////////////////// WHERE THE MAGIC HAPPENS //////////////////////////////////
@@ -100,6 +106,27 @@ Jimp.read(IMAGE_NAME, (err, level) => {
         case LASER_COLOR:
           generateLaser(level, xCoord, yCoord);
           break;
+        case LASER_SIDE_COLOR:
+          generateLaserSide(level, xCoord, yCoord);
+          break;
+        case TURRET_RIGHT_COLOR:
+          generateTurretRight(level, xCoord, yCoord);
+          break;
+        case TURRET_DOWN_COLOR:
+          generateTurretDown(level, xCoord, yCoord);
+          break;
+        case TURRET_LEFT_COLOR:
+          generateTurretLeft(level, xCoord, yCoord);
+          break;
+        case TURRET_UP_COLOR:
+          generateTurretUp(level, xCoord, yCoord);
+          break;
+        case CLOCK_COLOR:
+            generateClock(level, xCoord, yCoord);
+            break;
+        case SIGMA_COLOR:
+              generateSigma(level, xCoord, yCoord);
+              break;
         default:
             break;
       }
@@ -174,6 +201,18 @@ const generateMettaur = (level, col, row) => {
       },gravity));`
     );
   };
+
+  const generateSigma = (level, col, row) => {
+    console.log("Generating Sigma.... at ", col, " ", row);
+    //fill pixel with white
+    level.setPixelColor(0x000000, col, row);
+    //add the player command to the command array
+    levelcommands.push(
+      `gameEngine.addEntity(new Sigma(gameEngine, ${col}, ${
+        row - level.bitmap.height
+      }));`
+    );
+  };
   const generateLaser = (level, col, row) => {
     console.log("Generating BeamBarrier.... at ", col, " ", row);
     //fill pixel with white
@@ -183,6 +222,18 @@ const generateMettaur = (level, col, row) => {
       `gameEngine.addEntity(new BeamBarrier(gameEngine, ${col}, ${
         row - level.bitmap.height
       },0,
+      1));`
+    );
+  };
+  const generateLaserSide = (level, col, row) => {
+    console.log("Generating BeamBarrier.... at ", col, " ", row);
+    //fill pixel with white
+    level.setPixelColor(0x000000, col, row);
+    //add the player command to the command array
+    levelcommands.push(
+      `gameEngine.addEntity(new BeamBarrier(gameEngine, ${col}, ${
+        row - level.bitmap.height
+      },1,
       1));`
     );
   };
@@ -208,6 +259,66 @@ const generateMettaur = (level, col, row) => {
       `gameEngine.addEntity(new FullHealthPack(gameEngine, ${col}, ${
         row - level.bitmap.height
       }));`
+    );
+  };
+  const generateTurretRight = (level, col, row) => {
+    console.log("Generating Turret.... at ", col, " ", row);
+    //fill pixel with white
+    level.setPixelColor(0x000000, col, row);
+    //add the player command to the command array
+    levelcommands.push(
+      `gameEngine.addEntity(new Turret(gameEngine, ${col}, ${
+        row - level.bitmap.height
+      },
+      1));`
+    );
+  };
+  const generateTurretUp = (level, col, row) => {
+    console.log("Generating Turret.... at ", col, " ", row);
+    //fill pixel with white
+    level.setPixelColor(0x000000, col, row);
+    //add the player command to the command array
+    levelcommands.push(
+      `gameEngine.addEntity(new Turret(gameEngine, ${col}, ${
+        row - level.bitmap.height
+      },
+      0));`
+    );
+  };
+  const generateTurretDown = (level, col, row) => {
+    console.log("Generating Turret.... at ", col, " ", row);
+    //fill pixel with white
+    level.setPixelColor(0x000000, col, row);
+    //add the player command to the command array
+    levelcommands.push(
+      `gameEngine.addEntity(new Turret(gameEngine, ${col}, ${
+        row - level.bitmap.height
+      },
+    2));`
+    );
+  };
+  const generateTurretLeft = (level, col, row) => {
+    console.log("Generating Turret.... at ", col, " ", row);
+    //fill pixel with white
+    level.setPixelColor(0x000000, col, row);
+    //add the player command to the command array
+    levelcommands.push(
+      `gameEngine.addEntity(new Turret(gameEngine, ${col}, ${
+        row - level.bitmap.height
+      },
+      3));`
+    );
+  };
+  const generateClock = (level, col, row) => {
+    console.log("Generating Clock.... at ", col, " ", row);
+    //fill pixel with white
+    level.setPixelColor(0x000000, col, row);
+    //add the player command to the command array
+    levelcommands.push(
+      `gameEngine.addEntity(new Clock(gameEngine, ${col}, ${
+        row - level.bitmap.height
+      },
+      5000));`
     );
   };
   const generateDogBoss = (level, col, row) => {
@@ -295,7 +406,7 @@ const generateGroundTile = (level, startCol, startRow) => {
   }
   //add the ground tile command to the command array
   levelcommands.push(
-    `gameEngine.addEntity(new Ground(gameEngine, 1, ${startCol}, ${
+    `gameEngine.addEntity(new Ground(gameEngine, 2, ${startCol}, ${
       startRow - level.bitmap.height
     }, ${minWidth}, ${minHeight}, 1, 0, 0));`
   );
