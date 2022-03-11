@@ -30,5 +30,5 @@ https://www.youtube.com/watch?v=cjMHRbpUyd4
    ### Sigma Grind Github page:
 
   [GitHub Repository](https://github.com/apotafiy/sigma-grind)
-## Check out My Github
+### Check Out My Github
    [Vlad Tregubov](https://github.com/treguv)
